@@ -1,0 +1,16 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Features from '~/components/widgets/Features.astro';
+import { SERVICES } from '~/data/site';
+
+const metadata = { title: 'Services', description: 'EPCMst services for industrial and infrastructure projects in Western Canada.' };
+---
+
+<Layout metadata={metadata}>
+  <HeroText tagline="Services" title="EPCM specialists for every project phase" subtitle="Twelve service areas, each with pre-vetted specialists on short-term, fixed-rate contracts." />
+  <Features
+    columns={3}
+    items={SERVICES.map((s) => ({ title: s.label, description: s.blurb, icon: s.icon, callToAction: { text: 'Read more', href: `/services/${s.slug}` } }))}
+  />
+</Layout>

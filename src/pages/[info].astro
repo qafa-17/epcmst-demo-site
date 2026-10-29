@@ -1,0 +1,22 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { INFO_PAGES, REAL_SITE } from '~/data/site';
+
+export function getStaticPaths() {
+  return Object.entries(INFO_PAGES).map(([info, page]) => ({ params: { info }, props: { page, info } }));
+}
+
+const { page, info } = Astro.props;
+const metadata = { title: page.title, description: page.text };
+---
+
+<Layout metadata={metadata}>
+  <HeroText tagline="EPCMst (demo)" title={page.title} subtitle={page.text} />
+  <CallToAction
+    title="This page is a placeholder"
+    subtitle="This demo site exists to show articles published from the EPCMst Content Operations hub. The full page is on the real website."
+    actions={[{ variant: 'secondary', text: `See it on epcmst.com`, href: `${REAL_SITE}/${info}`, target: '_blank', icon: 'tabler:external-link' }]}
+  />
+</Layout>

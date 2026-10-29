@@ -1,0 +1,57 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { SERVICES } from '~/data/site';
+
+const metadata = {
+  title: 'EPCMst Technical Services (demo site)',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Calgary · Western Canada"
+    actions={[
+      { variant: 'primary', text: 'Read the Knowledge Hub', href: '/resources', icon: 'tabler:article' },
+      { text: 'Explore services', href: '/services' },
+    ]}
+  >
+    <Fragment slot="title">
+      Pre-vetted EPCM specialists, <span class="text-accent dark:text-white">deployed in days</span>
+    </Fragment>
+    <Fragment slot="subtitle">
+      EPCMst connects owners of energy, pipeline and industrial projects directly with engineering, procurement and
+      worksite specialists, on fixed-rate contracts.
+    </Fragment>
+  </Hero>
+
+  <Note
+    title="Demo site:"
+    description="a copy of epcmst.com built for a university project, to show articles going live from the Content Operations hub."
+  />
+
+  <BlogLatestPosts
+    title="Latest from the Knowledge Hub"
+    information="Articles are written and reviewed in the EPCMst Content Operations hub, then published here automatically."
+    count={4}
+  />
+
+  <Features
+    id="services"
+    tagline="Services"
+    title="Specialists for every project phase"
+    columns={3}
+    items={SERVICES.map((s) => ({ title: s.label, description: s.blurb, icon: s.icon, callToAction: { text: 'Read more', href: `/services/${s.slug}` } }))}
+  />
+
+  <CallToAction
+    title="Need a specialist?"
+    subtitle="Email the EPCMst team and describe the task."
+    actions={[{ variant: 'primary', text: 'support@epcmst.com', href: 'mailto:support@epcmst.com', icon: 'tabler:mail' }]}
+  />
+</Layout>

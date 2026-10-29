@@ -1,0 +1,24 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { SERVICES } from '~/data/site';
+
+export function getStaticPaths() {
+  return SERVICES.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+
+const { service } = Astro.props;
+const metadata = { title: service.label, description: service.blurb };
+---
+
+<Layout metadata={metadata}>
+  <HeroText tagline="Services" title={service.label} subtitle={service.blurb} />
+  <BlogLatestPosts title="Latest from the Knowledge Hub" information="Practical articles for project owners and commercial teams." count={4} />
+  <CallToAction
+    title="Need a specialist?"
+    subtitle="Email the EPCMst team and describe the task."
+    actions={[{ variant: 'primary', text: 'support@epcmst.com', href: 'mailto:support@epcmst.com', icon: 'tabler:mail' }]}
+  />
+</Layout>
